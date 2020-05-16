@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/logos/logo.svg';
 import { Container } from './styles';
 
 function Header() {
     return (
         <Container>
-            <img src={Logo} alt="pokebola pokereact" />
+            <Link to="/">
+                <img src={Logo} alt="pokebola pokereact" />
+            </Link>
         </Container>
     );
 }
