@@ -5,6 +5,7 @@ import api from '../../services/api';
 
 function Main() {
     const [pokemons, setPokemons] = useState([]);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         async function loadDevs() {
@@ -14,11 +15,24 @@ function Main() {
         loadDevs();
     }, []);
 
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const result = await api.get(`/${search}`);
+        setSearch('');
+        console.log(result.data);
+    };
+
     return (
         <Container>
             <div>
-                <input type="text" />
-                <button type="button">SEARCH</button>
+                <form onSubmit={handleSearch}>
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <button type="submit">SEARCH</button>
+                </form>
             </div>
             <GridContainer>
                 {pokemons.map((pokemon) => (
