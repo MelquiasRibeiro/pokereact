@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import bulba from '../../assets/images/bulba.png';
 import { Container, GridContainer } from './styles';
+import api from '../../services/api';
 
 function Main() {
+    const [pokemons, setPokemons] = useState([]);
+
+    useEffect(() => {
+        async function loadDevs() {
+            const response = await api.get('?limit=9');
+            setPokemons(response.data.results);
+        }
+        loadDevs();
+    }, []);
+
     return (
         <Container>
             <div>
@@ -11,80 +21,25 @@ function Main() {
                 <button type="button">SEARCH</button>
             </div>
             <GridContainer>
-                <Link to="/info">
-                    <li>
-                        <img src={bulba} alt="pokefoto" />
-                        <strong>Nome dele</strong>
-                        <div>
-                            <span>Grama</span>
-                            <span>Venenoso</span>
-                        </div>
-                    </li>
-                </Link>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
-                <li>
-                    <img src={bulba} alt="pokefoto" />
-                    <strong>Nome dele</strong>
-                    <div>
-                        <span>Grama</span>
-                        <span>Venenoso</span>
-                    </div>
-                </li>
+                {pokemons.map((pokemon) => (
+                    <Link to="/info" key={pokemon.name}>
+                        <li>
+                            <img
+                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                                    pokemon.url.split('/')[
+                                        pokemon.url.split('/').length - 2
+                                    ]
+                                }.png?raw=true`}
+                                alt="pokefoto"
+                            />
+                            <strong>{pokemon.name}</strong>
+                            <div>
+                                <span>plant</span>
+                                <span>Venenoso</span>
+                            </div>
+                        </li>
+                    </Link>
+                ))}
             </GridContainer>
         </Container>
     );
