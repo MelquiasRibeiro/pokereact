@@ -25,7 +25,7 @@ export const BottomSide = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 15px;
 `;
 export const Geral = styled.div`
     display: flex;
@@ -35,6 +35,7 @@ export const Geral = styled.div`
     h1 {
         margin-bottom: 20px;
         color: #29435b;
+        text-transform: uppercase;
     }
     p {
         font-size: 16px;
@@ -48,6 +49,7 @@ export const Geral = styled.div`
         height: 200;
         width: 199;
         border-radius: 16px;
+        background: #fafafa;
     }
 `;
 
@@ -76,11 +78,26 @@ export const Profile = styled.div`
     }
     ul {
         list-style: none;
-        margin-left: 45px;
-        margin-right: 45px;
-        margin-top: 45px;
+        margin-top: 30px;
         color: #29435b;
         font-weight: bold;
         font-size: 16px;
+    }
+    li {
+        margin-top: 16px;
+    }
+    progress[value] {
+        /* Reset the default appearance */
+        -webkit-appearance: none;
+        appearance: none;
+        margin-left: 16px;
+    }
+    progress[value]::-webkit-progress-bar {
+        background-color: #1976d2;
+        border-radius: 4px;
+    }
+    progress[value]::-webkit-progress-value {
+        background-color: #c33c5b;
+        border-radius: 4px;
     }
 `;

@@ -7,7 +7,7 @@ export default function Routes() {
     return (
         <Switch>
             <Route path="/" exact component={Main} />
-            <Route path="/info" exact component={Info} />
+            <Route path="/info/:pokemon" component={Info} />
         </Switch>
     );
 }

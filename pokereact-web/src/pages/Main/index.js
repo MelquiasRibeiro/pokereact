@@ -9,23 +9,22 @@ function Main() {
 
     useEffect(() => {
         async function loadPoke() {
-            const response = await api.get('?limit=9');
+            const response = await api.get('/pokemon/?limit=9');
             setPokemons(response.data.results);
         }
         loadPoke();
     }, []);
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        const result = await api.get(`/${search}`);
-        setSearch('');
-        console.log(result.data);
-    };
+    // const handleSearch = async (e) => {
+    //     e.preventDefault();
+    //     const result = await api.get(`/${search}`);
+    //     setSearch('');
+    // };
 
     return (
         <Container>
             <div>
-                <form onSubmit={handleSearch}>
+                <form onSubmit={() => {}}>
                     <input
                         type="text"
                         value={search}
@@ -36,7 +35,11 @@ function Main() {
             </div>
             <GridContainer>
                 {pokemons.map((pokemon) => (
-                    <PokeCard name={pokemon.name} url={pokemon.url} />
+                    <PokeCard
+                        key={pokemon.name}
+                        name={pokemon.name}
+                        url={pokemon.url}
+                    />
                 ))}
             </GridContainer>
         </Container>

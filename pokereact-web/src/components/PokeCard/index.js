@@ -4,20 +4,39 @@ import { Container } from './styles';
 import api from '../../services/api';
 
 function PokeCard({ name, url }) {
+    const [pokeTypes, setPokeTypes] = useState([]);
     const index = url.split('/')[url.split('/').length - 2];
-    const [pokeInfo, setPokeInfo] = useState([]);
 
     useEffect(() => {
         async function loadInfo() {
             const response = await api.get(`/${index}`);
-            setPokeInfo(response.data.results);
+            setPokeTypes(response.data.types);
         }
         loadInfo();
-    }, []);
-
+    }, [index]);
+    const TYPE_COLORS = {
+        bug: '#B1C12E',
+        dark: '#4F3A2D',
+        dragon: '#755EDF',
+        electric: '#FCBC17',
+        fairy: '#F4B1F4',
+        fighting: '#823551',
+        fire: '#E73B0C',
+        flying: '#A3B3F7',
+        ghost: '#6060B2',
+        grass: '#74C236',
+        ground: '#D3B357',
+        ice: '#A3E7FD',
+        normal: '#C8C4BC',
+        poison: '#934594',
+        psychic: '#ED4882',
+        rock: '#B9A156',
+        steel: '#B5B5C3',
+        water: '#3295F6',
+    };
     return (
         <Container>
-            <Link to="/info" key={name}>
+            <Link to={`/info/${encodeURIComponent(index)}`}>
                 <li>
                     <img
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png?raw=true`}
@@ -25,8 +44,14 @@ function PokeCard({ name, url }) {
                     />
                     <strong>{name}</strong>
                     <div>
-                        <span>plant</span>
-                        <span>Venenoso</span>
+                        {pokeTypes.map((type) => (
+                            <span
+                                key={type.type.name}
+                                cor={TYPE_COLORS[type.type.name]}
+                            >
+                                {type.type.name}
+                            </span>
+                        ))}
                     </div>
                 </li>
             </Link>

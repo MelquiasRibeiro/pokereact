@@ -39,12 +39,12 @@ export const Container = styled.div`
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: 24px;
-            background: #6159c1;
-            border-radius: 4px;
+            background: ${(props) => (props.cor ? '#7159c1' : '#3333')};
+            border-radius: 8px;
             color: #fafafa;
             font-weight: bold;
             margin-right: 8px;
+            padding: 8px;
         }
     }
 `;
