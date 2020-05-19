@@ -6,11 +6,13 @@ import PokeCard from '../../components/PokeCard/index';
 function Main() {
     const [pokemons, setPokemons] = useState([]);
     const [search, setSearch] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function loadPoke() {
             const response = await api.get('/pokemon/?limit=9');
             setPokemons(response.data.results);
+            setLoading(false);
         }
         loadPoke();
     }, []);
@@ -34,13 +36,17 @@ function Main() {
                 </form>
             </div>
             <GridContainer>
-                {pokemons.map((pokemon) => (
-                    <PokeCard
-                        key={pokemon.name}
-                        name={pokemon.name}
-                        url={pokemon.url}
-                    />
-                ))}
+                {loading ? (
+                    <h1>carregando...</h1>
+                ) : (
+                    pokemons.map((pokemon) => (
+                        <PokeCard
+                            key={pokemon.name}
+                            name={pokemon.name}
+                            url={pokemon.url}
+                        />
+                    ))
+                )}
             </GridContainer>
         </Container>
     );

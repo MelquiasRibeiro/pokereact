@@ -32,6 +32,7 @@ function Info({ match }) {
     const [hatchSteps, setHatchSteps] = useState(0);
     const [abilities, setAbilities] = useState('');
     const [evs, setEvs] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function loadInfo() {
@@ -115,6 +116,7 @@ function Info({ match }) {
                 })
                 .join(', ');
             setEggGroups(eggs);
+            setLoading(false);
         }
         loadAbout();
     }, [pokemon]);
@@ -152,47 +154,53 @@ function Info({ match }) {
     return (
         <Wrapper>
             <Container>
-                <TopSide>
-                    <Geral>
-                        <h1>{info.name}</h1>
-                        <img src={image} alt={info.name} />
-                        <p>{description}</p>
-                    </Geral>
-                    <Abilities>
-                        <ReactApexCharts
-                            options={grafico.options}
-                            series={grafico.series}
-                            type="radar"
-                            width={450}
-                            height={315}
-                        />
-                    </Abilities>
-                </TopSide>
-                <BottomSide>
-                    <Profile>
-                        <h1> Profile</h1>
-                        <div>
-                            <ul>
-                                <li>Height: {height} </li>
-                                <li>Weight: {weight} </li>
-                                <li>Catch Rate: {`${catchRate} %`} </li>
-                                <li>
-                                    Gender Ratio:
-                                    <progress
-                                        value={genderRatioFemale}
-                                        max="100"
-                                    />
-                                </li>
-                            </ul>
-                            <ul>
-                                <li>Eggs Groups: {eggGroups} </li>
-                                <li>Abilities: {abilities} </li>
-                                <li>EVs: {evs} </li>
-                                <li>Hatch Steps: {hatchSteps} </li>
-                            </ul>
-                        </div>
-                    </Profile>
-                </BottomSide>
+                {loading ? (
+                    <h1>Carregando...</h1>
+                ) : (
+                    <>
+                        <TopSide>
+                            <Geral>
+                                <h1>{info.name}</h1>
+                                <img src={image} alt={info.name} />
+                                <p>{description}</p>
+                            </Geral>
+                            <Abilities>
+                                <ReactApexCharts
+                                    options={grafico.options}
+                                    series={grafico.series}
+                                    type="radar"
+                                    width={450}
+                                    height={315}
+                                />
+                            </Abilities>
+                        </TopSide>
+                        <BottomSide>
+                            <Profile>
+                                <h1> Profile</h1>
+                                <div>
+                                    <ul>
+                                        <li>Height: {height} </li>
+                                        <li>Weight: {weight} </li>
+                                        <li>Catch Rate: {`${catchRate} %`} </li>
+                                        <li>
+                                            Gender Ratio:
+                                            <progress
+                                                value={genderRatioFemale}
+                                                max="100"
+                                            />
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>Eggs Groups: {eggGroups} </li>
+                                        <li>Abilities: {abilities} </li>
+                                        <li>EVs: {evs} </li>
+                                        <li>Hatch Steps: {hatchSteps} </li>
+                                    </ul>
+                                </div>
+                            </Profile>
+                        </BottomSide>
+                    </>
+                )}
             </Container>
         </Wrapper>
     );

@@ -45,4 +45,7 @@ export const GridContainer = styled.ul`
     a {
         text-decoration: none;
     }
+    h1 {
+        color: #fec90b;
+    }
 `;
