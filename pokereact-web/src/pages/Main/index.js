@@ -7,7 +7,7 @@ function Main() {
     const [pokemons, setPokemons] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true);
-    const [offset, setOffset] = useState(100);
+    const [offset, setOffset] = useState(0);
 
     useEffect(() => {
         async function loadPoke() {
@@ -19,11 +19,11 @@ function Main() {
         }
         loadPoke();
     }, [offset]);
-    // const handleSearch = async (e) => {
-    //     e.preventDefault();
-    //     const result = await api.get(`/${search}`);
-    //     setSearch('');
-    // };
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const result = await api.get(`/${search}`);
+        setSearch('');
+    };
     const handleNextPage = async (e) => {
         e.preventDefault();
         setOffset(offset + 9);
@@ -38,7 +38,7 @@ function Main() {
     return (
         <Container>
             <div>
-                <form onSubmit={() => {}}>
+                <form onSubmit={handleSearch}>
                     <input
                         type="text"
                         value={search}
