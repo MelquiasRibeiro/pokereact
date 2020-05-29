@@ -1,7 +1,7 @@
 # PokeReact (Work in progress)
 Está aplicação foi desenvolvida com React.js utilizando a api [PokeAPI](https://pokeapi.co/docs/v2.html/) que fornece dados sobre o universo de Pokemon.
 
-veja mais [Aqui](https://pokereact.surge.sh/)
+veja mais neste [Link](https://pokereact.surge.sh/)
 
 ## Telas 
 ![Screenshot from 2020-05-20 17-51-33](https://user-images.githubusercontent.com/54459438/82496854-c1dce180-9ac3-11ea-90a9-bb06abbbd458.png)
