@@ -49,3 +49,10 @@ export const GridContainer = styled.ul`
         color: #fec90b;
     }
 `;
+export const PagesButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    > button {
+        margin-right: 30px;
+    }
+`;

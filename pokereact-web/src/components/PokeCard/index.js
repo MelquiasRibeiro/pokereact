@@ -9,7 +9,7 @@ function PokeCard({ name, url }) {
 
     useEffect(() => {
         async function loadInfo() {
-            const response = await api.get(`/${index}`);
+            const response = await api.get(`/pokemon/${index}`);
             setPokeTypes(response.data.types);
         }
         loadInfo();
